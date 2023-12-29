@@ -1,0 +1,512 @@
+{
+	"info": {
+		"_postman_id": "6cc8d73b-aa1c-4373-9c2f-7dfcb05d07ce",
+		"name": "SAAS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24253958"
+	},
+	"item": [
+		{
+			"name": "Master",
+			"item": [
+				{
+					"name": "Get all roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/master/roles",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"master",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/users",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Selected users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/users?id=1",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"arghya992\",\r\n    \"password\":\"arghya\",\r\n    \"first_name\":\"Soumyanjan\",\r\n    \"last_name\":\"Dey\",\r\n    \"email_id\":\"arghya992@gmail.com\",\r\n    \"about\":\"IT developer\",\r\n    \"linkedin_profile\":\"\",\r\n    \"facebook_profile\":\"\",\r\n    \"instagram_profile\":\"\",\r\n    \"role\":\"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/users",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update users",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\":\"Admin\",\r\n    \"last_name\":\"Dev\",\r\n    \"email_id\":\"admin@gmail.com\",\r\n    \"about\":\"IT developers\",\r\n    \"linkedin_profile\":\"\",\r\n    \"facebook_profile\":\"\",\r\n    \"instagram_profile\":\"\",\r\n    \"status\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/users?id=1",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"new_pass\":\"arghya\",\r\n    \"confirm_pass\":\"arghya\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/user/changepass?id=2",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"user",
+								"changepass"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Create category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category_name\":\"PHP\",\r\n    \"category_slug\":\"php\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/categories",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category_name\":\"PHP\",\r\n    \"category_slug\":\"php\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/categories?id=20231229103946",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "20231229103946"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Selected category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/categories?id=20231229103946",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "20231229103946"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/categories",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blogs",
+			"item": [
+				{
+					"name": "Create blog",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "blog_title",
+									"value": "Second Title",
+									"type": "text"
+								},
+								{
+									"key": "blog_slug",
+									"value": "second-title",
+									"type": "text"
+								},
+								{
+									"key": "blog_post",
+									"value": "Posted",
+									"type": "text"
+								},
+								{
+									"key": "blog_cover_pic",
+									"type": "file",
+									"src": "/C:/Users/SOUMYANJAN DEY/Desktop/Sample pics/1.jpg"
+								},
+								{
+									"key": "meta_keywords",
+									"value": "How to search",
+									"type": "text"
+								},
+								{
+									"key": "meta_description",
+									"value": "This is second title description",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "20231229103946",
+									"type": "text"
+								},
+								{
+									"key": "created_by",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/blogs",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Selected blog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/blogs?id=20231229225405",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"blogs"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "20231229225405"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all blogs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/blogs",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update blog",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"blog_title\":\"Second Titles\",\r\n    \"blog_slug\":\"second-title\",\r\n    \"blog_post\":\"Posted\",\r\n    \"meta_keywords\":\"How to searchs\",\r\n    \"meta_description\":\"This is second title description\",\r\n    \"category_id\":\"20231229103946\",\r\n    \"status\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/blogs?id=20231229225718",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"blogs"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "20231229225718"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete blog",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/blogs?id=20231229225405",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"blogs"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "20231229225405"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change cover image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "blog_cover_pic",
+									"type": "file",
+									"src": "/C:/Users/SOUMYANJAN DEY/Desktop/Sample pics/1.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/blogs/change_pic?id=20231229225405",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"blogs",
+								"change_pic"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "20231229225405"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{saasexpresstimes_url}}/user/login",
+					"host": [
+						"{{saasexpresstimes_url}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
