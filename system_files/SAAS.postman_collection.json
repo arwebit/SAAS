@@ -293,7 +293,7 @@
 							"formdata": [
 								{
 									"key": "blog_title",
-									"value": "Second Title",
+									"value": "Second title",
 									"type": "text"
 								},
 								{
@@ -303,13 +303,13 @@
 								},
 								{
 									"key": "blog_post",
-									"value": "Posted",
+									"value": "Posted second",
 									"type": "text"
 								},
 								{
 									"key": "blog_cover_pic",
 									"type": "file",
-									"src": "/C:/Users/SOUMYANJAN DEY/Desktop/Sample pics/1.jpg"
+									"src": "/C:/Users/SOUMYANJAN DEY/Desktop/Sample pics/2.jpg"
 								},
 								{
 									"key": "meta_keywords",
@@ -318,7 +318,7 @@
 								},
 								{
 									"key": "meta_description",
-									"value": "This is second title description",
+									"value": "This is first title description",
 									"type": "text"
 								},
 								{
@@ -356,7 +356,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{saasexpresstimes_url}}/blogs?id=20231229225405",
+							"raw": "{{saasexpresstimes_url}}/blogs?id=20231229225718",
 							"host": [
 								"{{saasexpresstimes_url}}"
 							],
@@ -366,7 +366,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "20231229225405"
+									"value": "20231229225718"
 								}
 							]
 						}
@@ -456,12 +456,12 @@
 								{
 									"key": "blog_cover_pic",
 									"type": "file",
-									"src": "/C:/Users/SOUMYANJAN DEY/Desktop/Sample pics/1.jpg"
+									"src": "/C:/Users/SOUMYANJAN DEY/Desktop/Sample pics/2.jpg"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{saasexpresstimes_url}}/blogs/change_pic?id=20231229225405",
+							"raw": "{{saasexpresstimes_url}}/blogs/change_pic?id=20231231112959",
 							"host": [
 								"{{saasexpresstimes_url}}"
 							],
@@ -472,7 +472,60 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "20231229225405"
+									"value": "20231231112959"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Get blog by slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/search/blog/second-title",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"search",
+								"blog",
+								"second-title"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get category by slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{saasexpresstimes_url}}/search/category/php?page_no=1&records=2",
+							"host": [
+								"{{saasexpresstimes_url}}"
+							],
+							"path": [
+								"search",
+								"category",
+								"php"
+							],
+							"query": [
+								{
+									"key": "page_no",
+									"value": "1"
+								},
+								{
+									"key": "records",
+									"value": "2"
 								}
 							]
 						}

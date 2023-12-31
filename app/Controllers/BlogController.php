@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Master;
+namespace App\Controllers;
 
 use App\Bootstrap\{Response, Request, Validation};
 use App\Database\Query;
@@ -12,7 +12,7 @@ class BlogController
 
     public static function show($params)
     {
-        $id = $params->id;
+        $id = trim($params->id);
 
         if (empty($id)) {
             $db = Query::table("blog")->select();
@@ -38,6 +38,7 @@ class BlogController
     {
         $blogID = date("YmdHis");
         $validator = new Validation($req->input());
+
 
         $validationRules = [
             "blog_title" => [
@@ -79,9 +80,20 @@ class BlogController
 
         if ($validator->validate()) {
 
-            $db = Query::table("blog")->insert(["blog_id" => $blogID, "blog_title" => $req->input("blog_title"), "blog_slug" => strtolower($req->input("blog_slug")), "blog_post" => $req->input("blog_post"), "meta_keywords" => $req->input("meta_keywords"), "meta_description" => $req->input("meta_description"), "status" => $req->input("status"), "created_by" => $req->input("created_by"), "created_on" => date("Y-m-d H:i:s"), "blog_cover_pic" => Vaults::fileDetails($req->input("blog_cover_pic"), "fileEncrypt"), "blog_cover_pic_type" => Vaults::fileDetails($req->input("blog_cover_pic"), "fileType"), "category_id" => $req->input("category_id"),]);
+            $fileTmpName = Vaults::fileDetails($req->input("blog_cover_pic"), "fileTempName");
+            $pathDirectory = "cover_images/";
+            if (!is_dir($pathDirectory)) {
+                mkdir($pathDirectory, 0754);
+            }
+
+            $fileType = Vaults::fileDetails($req->input("blog_cover_pic"), "fileType");
+            $extension = Vaults::fileDetails($req->input("blog_cover_pic"), "fileExtension");
+            $fileName = md5(date("YmdHis"));
+
+            $db = Query::table("blog")->insert(["blog_id" => $blogID, "blog_title" => trim($req->input("blog_title")), "blog_slug" => trim(strtolower($req->input("blog_slug"))), "blog_post" => trim($req->input("blog_post")), "meta_keywords" => trim($req->input("meta_keywords")), "meta_description" => trim($req->input("meta_description")), "status" => trim($req->input("status")), "created_by" => trim($req->input("created_by")), "created_on" => date("Y-m-d H:i:s"), "blog_cover_pic" => $fileName . "." . $extension, "blog_cover_pic_type" => $fileType, "category_id" => trim($req->input("category_id"))]);
 
             if ($db->save()) {
+                Vaults::fileUpload($pathDirectory, $fileTmpName, $extension, $fileName);
                 $response = new Response(["statusCode" => 201, "message" => "Successfully saved"], 201);
             } else {
                 $response = new Response(["statusCode" => 500, "message" => "Server error", "errors" => "Cannot save"], 500);
@@ -94,7 +106,7 @@ class BlogController
 
     public static function update(Request $req, $params)
     {
-        $blogID = $params->id;
+        $blogID = trim($params->id);
         $validator = new Validation($req->input());
 
         $validationRules = [
@@ -131,8 +143,7 @@ class BlogController
         $validator->validateRules($validationRules);
 
         if ($validator->validate()) {
-
-            $db = Query::table("blog")->update(["blog_title" => $req->input("blog_title"), "blog_slug" => strtolower($req->input("blog_slug")), "blog_post" => $req->input("blog_post"), "meta_keywords" => $req->input("meta_keywords"), "meta_description" => $req->input("meta_description"), "status" => $req->input("status"), "category_id" => $req->input("category_id")])->where("blog_id=?", [$blogID]);
+            $db = Query::table("blog")->update(["blog_title" => trim($req->input("blog_title")), "blog_slug" => trim(strtolower($req->input("blog_slug"))), "blog_post" => trim($req->input("blog_post")), "meta_keywords" => trim($req->input("meta_keywords")), "meta_description" => trim($req->input("meta_description")), "status" => trim($req->input("status")), "category_id" => trim($req->input("category_id"))])->where("blog_id=?", [$blogID]);
 
             if ($db->save()) {
                 $response = new Response(["statusCode" => 201, "message" => "Successfully saved"], 201);
@@ -147,7 +158,7 @@ class BlogController
 
     public static function delete($params)
     {
-        $blogID = $params->id;
+        $blogID = trim($params->id);
         $db = Query::table("blog")->delete()->where("blog_id=?", [$blogID]);
 
         if ($db->save()) {
@@ -161,9 +172,12 @@ class BlogController
 
     public static function change_pic(Request $req, $params)
     {
-        $blogID = $params->id;
-        $validator = new Validation($req->input());
+        $blogID = trim($params->id);
 
+        $coverPic = Query::table("blog")->select()->where("blog_id=?", [$blogID])->single("blog_cover_pic");
+
+
+        $validator = new Validation($req->input());
         $validationRules = [
             "blog_cover_pic" => [
                 "file-required" => "Cover pic required",
@@ -177,10 +191,21 @@ class BlogController
 
         if ($validator->validate()) {
 
-            $db = Query::table("blog")->update(["blog_cover_pic" => Vaults::fileDetails($req->input("blog_cover_pic"), "fileEncrypt"), "blog_cover_pic_type" => Vaults::fileDetails($req->input("blog_cover_pic"), "fileType")])->where("blog_id=?", [$blogID]);
+            $fileTmpName = Vaults::fileDetails($req->input("blog_cover_pic"), "fileTempName");
+            $pathDirectory = "cover_images/";
+            if (!is_dir($pathDirectory)) {
+                mkdir($pathDirectory, 0754);
+            }
+            $fileType = Vaults::fileDetails($req->input("blog_cover_pic"), "fileType");
+            $extension = Vaults::fileDetails($req->input("blog_cover_pic"), "fileExtension");
+            $fileName = md5(date("YmdHis"));
+            $db = Query::table("blog")->update(["blog_cover_pic" => $fileName . "." . $extension, "blog_cover_pic_type" => $fileType,])->where("blog_id=?", [$blogID]);
 
             if ($db->save()) {
-                $response = new Response(["statusCode" => 201, "message" => "Successfully chenged"], 201);
+                $dir = __DIR__ . "/../../public/cover_images/" . $coverPic;
+                Vaults::deleteFile($dir);
+                Vaults::fileUpload($pathDirectory, $fileTmpName, $extension, $fileName);
+                $response = new Response(["statusCode" => 201, "message" => "Successfully changed"], 201);
             } else {
                 $response = new Response(["statusCode" => 500, "message" => "Server error", "errors" => "Cannot save"], 500);
             }

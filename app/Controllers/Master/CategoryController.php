@@ -9,7 +9,7 @@ class CategoryController
 {
     public static function show($params)
     {
-        $id = $params->id;
+        $id = trim($params->id);
 
         if (empty($id)) {
             $db = Query::table("categories")->select();
@@ -56,7 +56,7 @@ class CategoryController
 
         if ($validator->validate()) {
 
-            $db = Query::table("categories")->insert(["category_id" => $categoryID, "category_name" => $req->input("category_name"), "category_slug" => strtolower($req->input("category_slug"))]);
+            $db = Query::table("categories")->insert(["category_id" => $categoryID, "category_name" => trim($req->input("category_name")), "category_slug" => trim(strtolower($req->input("category_slug")))]);
 
             if ($db->save()) {
                 $response = new Response(["statusCode" => 201, "message" => "Successfully saved"], 201);
@@ -71,7 +71,7 @@ class CategoryController
 
     public static function update(Request $req, $params)
     {
-        $categoryID = $params->id;
+        $categoryID = trim($params->id);
         $validator = new Validation($req->input());
 
         $validationRules = [
@@ -94,7 +94,7 @@ class CategoryController
 
         if ($validator->validate()) {
 
-            $db = Query::table("categories")->update(["category_id" => $categoryID, "category_name" => $req->input("category_name"), "category_slug" => strtolower($req->input("category_slug"))])
+            $db = Query::table("categories")->update(["category_id" => $categoryID, "category_name" => trim($req->input("category_name")), "category_slug" => trim(strtolower($req->input("category_slug")))])
                 ->where("category_id=?", [$categoryID]);
 
             if ($db->save()) {
