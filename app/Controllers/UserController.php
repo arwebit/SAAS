@@ -24,7 +24,7 @@ class UserController
             $db = Query::table("user_details")->select()->where("user_id=?", [$id]);
 
             if ($db->count() > 0) {
-                $response = new Response(["statusCode" => 200, "message" => "Successfully retrieved", "details" => $db->get()], 200);
+                $response = new Response(["statusCode" => 200, "message" => "Successfully retrieved", "details" => $db->single()], 200);
             } else {
                 $response = new Response(["statusCode" => 206, "message" => "No records found"], 206);
             }
