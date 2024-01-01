@@ -168,11 +168,11 @@ class UserController
 
         $validationRules = [
             "new_pass" => [
-                "required" => "First name cannot be empty",
+                "required" => "New password cannot be empty",
                 "maxlength:10" => "Maximum 10 characters allowed"
             ],
             "confirm_pass" => [
-                "required" => "Last name cannot be empty",
+                "required" => "Confirm password cannot be empty",
                 "maxlength:10" => "Maximum 10 characters allowed",
                 "same:new_pass" => "Password doesnot matches"
             ]
