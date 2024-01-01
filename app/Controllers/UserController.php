@@ -13,7 +13,7 @@ class UserController
         $id = $params->id;
 
         if (empty($id)) {
-            $db = Query::table("user_details")->select();
+            $db = Query::table("user_details")->select()->join("login_access", "INNER JOIN", "user_details.username=login_access.username")->join("mas_role", "INNER JOIN", "login_access.role=mas_role.role_id");
 
             if ($db->count() > 0) {
                 $response = new Response(["statusCode" => 200, "message" => "Successfully retrieved", "details" => $db->get()], 200);
@@ -21,7 +21,7 @@ class UserController
                 $response = new Response(["statusCode" => 206, "message" => "No records found"], 206);
             }
         } else {
-            $db = Query::table("user_details")->select()->where("user_id=?", [$id]);
+            $db = Query::table("user_details")->select()->join("login_access", "INNER JOIN", "user_details.username=login_access.username")->join("mas_role", "INNER JOIN", "login_access.role=mas_role.role_id")->where("user_details.user_id=?", [$id]);
 
             if ($db->count() > 0) {
                 $response = new Response(["statusCode" => 200, "message" => "Successfully retrieved", "details" => $db->single()], 200);
