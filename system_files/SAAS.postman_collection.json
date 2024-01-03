@@ -67,7 +67,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{saasexpresstimes_url}}/users?id=1",
+							"raw": "{{saasexpresstimes_url}}/users?id=2",
 							"host": [
 								"{{saasexpresstimes_url}}"
 							],
@@ -77,7 +77,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -117,7 +117,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"first_name\":\"Admin\",\r\n    \"last_name\":\"Dev\",\r\n    \"email_id\":\"admin@gmail.com\",\r\n    \"about\":\"IT developers\",\r\n    \"linkedin_profile\":\"\",\r\n    \"facebook_profile\":\"\",\r\n    \"instagram_profile\":\"\",\r\n    \"status\":\"1\"\r\n}",
+							"raw": "{\r\n    \"first_name\":\"\",\r\n    \"last_name\":\"\",\r\n    \"email_id\":\"admin@gmail.com\",\r\n    \"about\":\"\",\r\n    \"linkedin_profile\":\"g\",\r\n    \"facebook_profile\":\"h\",\r\n    \"instagram_profile\":\"j\",\r\n    \"status\":\"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -187,7 +187,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"category_name\":\"PHP\",\r\n    \"category_slug\":\"php\"\r\n}",
+							"raw": "{\r\n    \"category_name\":\"\",\r\n    \"category_slug\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -379,12 +379,22 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{saasexpresstimes_url}}/blogs",
+							"raw": "{{saasexpresstimes_url}}/blogs?page_no=1&records=1",
 							"host": [
 								"{{saasexpresstimes_url}}"
 							],
 							"path": [
 								"blogs"
+							],
+							"query": [
+								{
+									"key": "page_no",
+									"value": "1"
+								},
+								{
+									"key": "records",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -541,7 +551,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"admin\"\r\n}",
+					"raw": "{\r\n    \"username\":\"a\",\r\n    \"password\":\"s\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

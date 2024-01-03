@@ -13,9 +13,11 @@ class BlogController
     public static function show($params)
     {
         $id = trim($params->id);
+        $pageNo = $params->page_no;
+        $records = $params->records;
 
         if (empty($id)) {
-            $db = Query::table("blog")->select();
+            $db = Query::table("blog")->select()->order("created_on DESC")->pagination($pageNo, $records);
 
             if ($db->count() > 0) {
                 $response = new Response(["statusCode" => 200, "message" => "Successfully retrieved", "records" => $db->count(), "details" => $db->get()], 200);
