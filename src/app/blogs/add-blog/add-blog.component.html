@@ -1,0 +1,122 @@
+<div class="wrapper">
+  <app-sidemenu></app-sidemenu>
+
+  <div class="main">
+    <app-top></app-top>
+
+    <main class="content">
+      <div class="container-fluid p-0">
+        <h1 class="h3 mb-3"><strong>Add blog</strong></h1>
+
+        <div class="row">
+          <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100">
+              <div class="card-body px-4">
+                <div class="card-header">
+                  <b [class]="className">{{ message }}</b>
+                </div>
+                <form [formGroup]="addBlogForm">
+                  <div class="mt-10">
+                    <label for="">Blog title <b class="red"> * </b></label>
+                    <input
+                      type="text"
+                      placeholder="Blog title"
+                      class="form-control"
+                      formControlName="blog_title"
+                      (keyup)="slugTransform($event)"
+                    />
+                    <b class="red"> {{ blogTitleErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for="">Blog slug <b class="red"> * </b></label>
+                    <input
+                      type="text"
+                      placeholder="Blog slug"
+                      class="form-control"
+                      formControlName="blog_slug"
+                      [(ngModel)]="slug"
+                    />
+                    <b class="red"> {{ blogSlugErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for=""
+                      >Blog cover image <b class="red"> * </b></label
+                    >
+                    <input
+                      class="form-control image_input"
+                      type="file"
+                      accept="image/*"
+                      id="picture"
+                      (change)="uploadFiles($event)"
+                    />
+                    <b class="red"> {{ coverImageErr }} </b>
+                  </div>
+
+                  <div class="mt-10">
+                    <label for="">Blog post <b class="red"> * </b></label>
+
+                    <textarea
+                      class="form-control"
+                      id="blog_post"
+                      formControlName="blog_post"
+                    ></textarea>
+                    <b class="red"> {{ blogPostErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for="">Meta keywords <b class="red"> * </b></label>
+                    <input
+                      type="text"
+                      placeholder="Meta keywords"
+                      class="form-control"
+                      formControlName="meta_keywords"
+                    />
+                    <b class="red"> {{ metaKeywordsErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for=""
+                      >Meta description <b class="red"> * </b></label
+                    >
+                    <input
+                      type="text"
+                      placeholder="Meta description"
+                      class="form-control"
+                      formControlName="meta_description"
+                    />
+                    <b class="red"> {{ metaDescriptionErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for="">Category</label>
+                    <select formControlName="category_id" class="form-control">
+                      <option value="">Select category</option>
+                      <option
+                        *ngFor="let categoryLists of categoryList"
+                        [value]="categoryLists.category_id"
+                      >
+                        {{ categoryLists.category_name }}
+                      </option>
+                    </select>
+                    <b class="red"> {{ categoryErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for="">Status</label>
+                    <select formControlName="status" class="form-control">
+                      <option value="1">Published</option>
+                      <option value="0">Draft</option>
+                    </select>
+                  </div>
+                  <div class="mt-10">
+                    <button class="btn btn-primary" (click)="save()">
+                      Create
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <app-bottom></app-bottom>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="wrapper">
+  <app-sidemenu></app-sidemenu>
+
+  <div class="main">
+    <app-top></app-top>
+
+    <main class="content">
+      <div class="container-fluid p-0">
+        <h1 class="h3 mb-3"><strong>Add user</strong></h1>
+
+        <div class="row">
+          <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+            <div class="card flex-fill w-100">
+              <div class="card-body px-4">
+                <div class="card-header">
+                  <b [class]="className">{{ message }}</b>
+                </div>
+                <form [formGroup]="addUserForm">
+                  <div class="mt-10">
+                    <label for="">First name <b class="red"> * </b></label>
+                    <input
+                      type="text"
+                      placeholder="First name"
+                      class="form-control"
+                      formControlName="first_name"
+                    />
+                    <b class="red"> {{ firstNameErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for="">Last name <b class="red"> * </b></label>
+                    <input
+                      type="text"
+                      placeholder="Last name"
+                      class="form-control"
+                      formControlName="last_name"
+                    />
+                    <b class="red"> {{ lastNameErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for="">Email ID</label>
+                    <input
+                      type="text"
+                      placeholder="Email ID"
+                      class="form-control"
+                      formControlName="email_id"
+                    />
+                    <b class="red"> {{ emailIDErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for="">LinkedIn Profile</label>
+                    <input
+                      type="text"
+                      placeholder="LinkedIn Profile"
+                      class="form-control"
+                      formControlName="linkedin_profile"
+                    />
+                    <b class="red"> {{ linkedinProfileErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for="">Facebook Profile</label>
+                    <input
+                      type="text"
+                      placeholder="Facebook Profile"
+                      class="form-control"
+                      formControlName="facebook_profile"
+                    />
+                    <b class="red"> {{ facebookProfileErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for="">Instagram Profile</label>
+                    <input
+                      type="text"
+                      placeholder="Instagram Profile"
+                      class="form-control"
+                      formControlName="instagram_profile"
+                    />
+                    <b class="red"> {{ instagramProfileErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for="">Status</label>
+                    <select formControlName="status" class="form-control">
+                      <option value="1">Active</option>
+                      <option value="0">In-active</option>
+                    </select>
+                    <b class="red"> {{ statusErr }} </b>
+                  </div>
+                  <div class="mt-10">
+                    <label for="">About <b class="red">* </b></label>
+                    <textarea
+                      placeholder="About"
+                      formControlName="about"
+                      class="form-control"
+                    ></textarea>
+                    <b class="red"> {{ aboutErr }} </b>
+                  </div>
+
+                  <div class="mt-10">
+                    <button class="btn btn-primary" (click)="save()">
+                      Create
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <app-bottom></app-bottom>
+  </div>
+</div>

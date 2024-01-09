@@ -1,0 +1,83 @@
+<div class="wrapper">
+  <app-sidemenu></app-sidemenu>
+
+  <div class="main">
+    <app-top></app-top>
+
+    <main class="content">
+      <div class="container-fluid p-0">
+        <h1 class="h3 mb-3"><strong>View blogs</strong></h1>
+        <a routerLink="add" class="btn btn-info">Add blog</a>
+        <div class="row mt-5">
+          <div
+            class="col-12 col-md-4"
+            *ngFor="
+              let blogLists of blogList
+                | paginate
+                  : {
+                      itemsPerPage: records,
+                      currentPage: page,
+                      totalItems: count
+                    };
+              let i = index
+            "
+          >
+            <div class="card">
+              <img
+                class="card-img-top"
+                [src]="
+                  'https://saasexpresstimes.com/server/public/cover_images/' +
+                  blogLists.blog_cover_pic
+                "
+                style="width: auto; height: 200px"
+              />
+              <div class="card-header">
+                <h5 class="card-title mb-0">
+                  {{ blogLists.blog_title }}
+                </h5>
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                  Category : {{ blogLists.category_name }}
+                </p>
+                <a
+                  [routerLink]="['change-cover', blogLists.blog_id]"
+                  class="btn btn-primary"
+                  >Change Image</a
+                >&nbsp;
+                <a
+                  [routerLink]="['edit', blogLists.blog_id]"
+                  class="btn btn-info"
+                  >Edit</a
+                >&nbsp;
+                <a
+                  (click)="deleteBlog(blogLists.blog_id)"
+                  class="btn btn-danger"
+                  >Delete</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <a
+        routerLink="../blogs"
+        [queryParams]="{ page_no: '9' }"
+        class="btn btn-info"
+        >Add blog</a
+      > -->
+
+        <div class="d-flex justify-content-center">
+          <pagination-controls
+            previousLabel="Prev"
+            nextLabel="Next"
+            (pageChange)="onTableDataChange($event)"
+          >
+          </pagination-controls>
+        </div>
+      </div>
+    </main>
+
+    <app-bottom></app-bottom>
+  </div>
+</div>

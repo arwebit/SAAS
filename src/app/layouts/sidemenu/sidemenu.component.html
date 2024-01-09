@@ -1,0 +1,37 @@
+<nav id="sidebar" class="sidebar js-sidebar">
+  <div class="sidebar-content js-simplebar">
+    <a class="sidebar-brand" routerLink="/home">
+      <span class="align-middle">SAAS</span>
+    </a>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-item">
+        <a
+          class="sidebar-link"
+          routerLink="/users"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="align-middle" data-feather="sliders"></i>
+          <span class="align-middle">Users</span>
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a
+          class="sidebar-link"
+          routerLink="/categories"
+          routerLinkActive="active"
+        >
+          <i class="align-middle" data-feather="sliders"></i>
+          <span class="align-middle">Categories</span>
+        </a>
+      </li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" routerLink="/blogs" routerLinkActive="active">
+          <i class="align-middle" data-feather="user"></i>
+          <span class="align-middle">Blogs</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,50 @@
+<div class="wrapper">
+  <app-sidemenu></app-sidemenu>
+
+  <div class="main">
+    <app-top></app-top>
+
+    <main class="content">
+      <div class="container-fluid p-0">
+        <h1 class="h3 mb-3"><strong>View Users</strong></h1>
+        <a routerLink="add" class="btn btn-info">Add user</a>
+        <div class="row mt-5">
+          <div class="col-12 col-lg-12 col-xxl-9 d-flex">
+            <div class="card flex-fill">
+              <table class="table table-hover my-0">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email ID</th>
+                    <th>About</th>
+                    <th>Role</th>
+                    <th>Option</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let userLists of userList">
+                    <td>
+                      {{ userLists.first_name }} {{ userLists.last_name }}
+                    </td>
+                    <td>{{ userLists.email_id }}</td>
+                    <td>{{ userLists.about }}</td>
+                    <td>{{ userLists.role_name }}</td>
+                    <td>
+                      <a
+                        [routerLink]="['edit', userLists.user_id]"
+                        class="btn btn-info"
+                        >EDIT
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <app-bottom></app-bottom>
+  </div>
+</div>
