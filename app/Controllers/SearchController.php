@@ -37,7 +37,6 @@ class SearchController
     public static function categorySearchBySlug($params)
     {
         $category_slug = trim($params->category_slug);
-
         $pageNo = trim($params->page_no);
         $records = trim($params->records);
 
@@ -49,8 +48,12 @@ class SearchController
         $data['category_name'] = $category['category_name'];
         $data['category_slug'] = $category['category_slug'];
         $i = 0;
-        $dbb = Query::table("blog")->select()->where("category_id=?", [$category['category_id']])->order("created_on DESC")->pagination($pageNo, $records)->get();
 
+        if (empty($pageNo) && empty($records)) {
+            $dbb = Query::table("blog")->select()->where("category_id=?", [$category['category_id']])->order("created_on DESC")->get();
+        } else {
+            $dbb = Query::table("blog")->select()->where("category_id=?", [$category['category_id']])->order("created_on DESC")->pagination($pageNo, $records)->get();
+        }
         while ($i < sizeof($dbb)) {
 
             $data['blogs'][$i]['id'] = $dbb[$i]['blog_id'];

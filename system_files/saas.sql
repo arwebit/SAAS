@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 31, 2023 at 07:02 AM
+-- Generation Time: Jan 05, 2024 at 03:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -74,7 +74,7 @@ CREATE TABLE `login_access` (
 
 INSERT INTO `login_access` (`user_id`, `username`, `password`, `role`, `status`) VALUES
 (1, 'admin', 'admin', 1, 1),
-(2, 'arghya992', 'arghya', 2, 1);
+(2, 'arghya992', 'arghya123', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -120,8 +120,7 @@ CREATE TABLE `user_details` (
 --
 
 INSERT INTO `user_details` (`user_id`, `username`, `first_name`, `last_name`, `email_id`, `about`, `linkedin_profile`, `facebook_profile`, `instagram_profile`, `status`) VALUES
-(1, 'admin', 'Admin', 'Dev', 'admin@gmail.com', 'IT developers', '', '', '', 1),
-(2, 'arghya992', 'Soumyanjan', 'Dey', 'arghya992@gmail.com', 'IT developer', '', '', '', 1);
+(1, 'admin', 'Admin', 'Dev', 'admin@gmail.com', 'IT developers', '', '', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -181,7 +180,7 @@ ALTER TABLE `mas_role`
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `user_id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

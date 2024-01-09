@@ -10,9 +10,15 @@ class CategoryController
     public static function show($params)
     {
         $id = trim($params->id);
+        $pageNo = trim($params->page_no);
+        $records = trim($params->records);
 
         if (empty($id)) {
-            $db = Query::table("categories")->select();
+            if (empty($pageNo) && empty($records)) {
+                $db = Query::table("categories")->select();
+            } else {
+                $db = Query::table("categories")->select()->pagination($pageNo, $records);
+            }
 
             if ($db->count() > 0) {
                 $response = new Response(["statusCode" => 200, "message" => "Successfully retrieved", "records" => $db->count(), "details" => $db->get()], 200);
@@ -41,7 +47,7 @@ class CategoryController
                 "required" => "Category name cannot be empty",
                 "db-unique:categories,category_name" => "Category exists. Please try another",
                 "maxlength:150" => "Maximum 150 characters allowed",
-                "pattern:a-zA-Z" => "Only letters are allowed"
+                "pattern:a-zA-Z\s" => "Only letters and white space are allowed"
             ],
             "category_slug" => [
                 "required" => "Category slug cannot be empty",
@@ -79,7 +85,7 @@ class CategoryController
                 "required" => "Category name cannot be empty",
                 "db-unique-except:categories,category_name,category_id-$categoryID" => "Category exists. Please try another",
                 "maxlength:150" => "Maximum 150 characters allowed",
-                "pattern:a-zA-Z" => "Only letters are allowed"
+                "pattern:a-zA-Z\s" => "Only letters and white space are allowed"
             ],
             "category_slug" => [
                 "required" => "Category slug cannot be empty",

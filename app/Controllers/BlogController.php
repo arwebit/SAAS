@@ -13,11 +13,15 @@ class BlogController
     public static function show($params)
     {
         $id = trim($params->id);
-        $pageNo = $params->page_no;
-        $records = $params->records;
+        $pageNo = trim($params->page_no);
+        $records = trim($params->records);
 
         if (empty($id)) {
-            $db = Query::table("blog")->select()->order("created_on DESC")->pagination($pageNo, $records);
+            if (empty($pageNo) && empty($records)) {
+                $db = Query::table("blog")->select()->join("categories", "INNER JOIN", "categories.category_id=blog.category_id")->order("blog.created_on DESC");
+            } else {
+                $db = Query::table("blog")->select()->join("categories", "INNER JOIN", "categories.category_id=blog.category_id")->order("blog.created_on DESC")->pagination($pageNo, $records);
+            }
 
             if ($db->count() > 0) {
                 $response = new Response(["statusCode" => 200, "message" => "Successfully retrieved", "records" => $db->count(), "details" => $db->get()], 200);
@@ -25,7 +29,7 @@ class BlogController
                 $response = new Response(["statusCode" => 206, "message" => "No records found"], 206);
             }
         } else {
-            $db = Query::table("blog")->select()->where("blog_id=?", [$id]);
+            $db = Query::table("blog")->select()->join("categories", "INNER JOIN", "categories.category_id=blog.category_id")->where("blog_id=?", [$id]);
 
             if ($db->count() > 0) {
                 $response = new Response(["statusCode" => 200, "message" => "Successfully retrieved", "details" => $db->single()], 200);
@@ -51,7 +55,8 @@ class BlogController
             "blog_slug" => [
                 "required" => "Blog slug cannot be empty",
                 "db-unique:blog,blog_slug" => "Blog slug exists. Please try another",
-                "maxlength:255" => "Maximum 255 characters allowed"
+                "maxlength:255" => "Maximum 255 characters allowed",
+                "pattern:a-zA-Z0-9-" => "Only letters, numbers and hyphens are allowed"
             ],
             "blog_post" => [
                 "required" => "Blog post cannot be empty"
@@ -120,7 +125,8 @@ class BlogController
             "blog_slug" => [
                 "required" => "Blog slug cannot be empty",
                 "db-unique-except:blog,blog_slug,blog_id-$blogID" => "Blog slug exists. Please try another",
-                "maxlength:255" => "Maximum 255 characters allowed"
+                "maxlength:255" => "Maximum 255 characters allowed",
+                "pattern:a-zA-Z0-9-" => "Only letters, numbers and hyphens are allowed"
             ],
             "blog_post" => [
                 "required" => "Blog post cannot be empty"
@@ -161,9 +167,12 @@ class BlogController
     public static function delete($params)
     {
         $blogID = trim($params->id);
+        $coverPic = Query::table("blog")->select()->where("blog_id=?", [$blogID])->single("blog_cover_pic");
         $db = Query::table("blog")->delete()->where("blog_id=?", [$blogID]);
 
         if ($db->save()) {
+            $dir = __DIR__ . "/../../public/cover_images/" . $coverPic;
+            Vaults::deleteFile($dir);
             $response = new Response(["statusCode" => 201, "message" => "Successfully deleted"], 201);
         } else {
             $response = new Response(["statusCode" => 500, "message" => "Server error", "errors" => "Cannot delete"], 500);
